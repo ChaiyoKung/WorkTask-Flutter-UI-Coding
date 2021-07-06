@@ -82,6 +82,7 @@ class MyAppBar extends StatelessWidget {
   }
 }
 
+// Custom text field in app bar.
 class AppBarTextField extends StatelessWidget {
   const AppBarTextField({Key? key}) : super(key: key);
 
