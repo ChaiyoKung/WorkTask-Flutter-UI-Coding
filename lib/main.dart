@@ -18,17 +18,25 @@ class MyApp extends StatelessWidget {
            */
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Image.asset('assets/icons/home_cut.png'),
-                label: "Bottom Tab 1"),
+              icon: Image.asset('assets/icons/home_cut.png'),
+              label: "Bottom Tab 1",
+            ),
             BottomNavigationBarItem(
-                icon: Image.asset('assets/icons/account_cut.png'),
-                label: "Bottom Tab 2"),
+              icon: Image.asset('assets/icons/account_cut.png'),
+              label: "Bottom Tab 2",
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.home), label: "Bottom Tab 3"),
+              icon: Icon(Icons.home),
+              label: "Bottom Tab 3",
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.bookmark), label: "Bottom Tab 4"),
+              icon: Icon(Icons.bookmark),
+              label: "Bottom Tab 4",
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle), label: "Bottom Tab 5"),
+              icon: Icon(Icons.account_circle),
+              label: "Bottom Tab 5",
+            ),
           ],
           showSelectedLabels: false,
           showUnselectedLabels: false,
@@ -38,7 +46,9 @@ class MyApp extends StatelessWidget {
           children: <Widget>[
             MyAppBar(),
             AdBanner(),
-            Expanded(child: TabContainer())
+            Expanded(
+              child: TabContainer(),
+            ),
           ],
         ),
       ),
@@ -54,17 +64,45 @@ class MyAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Image.asset('assets/icons/hara_logo.png'),
+          Image.asset('assets/icons/hara_logo.png'), // Can change app logo
+          Expanded(
+            child: AppBarTextField(),
+          ),
           IconButton(
             onPressed: null,
             icon: const Icon(
               Icons.favorite,
               color: Colors.black,
             ),
-          )
+          ),
         ],
+      ),
+    );
+  }
+}
+
+class AppBarTextField extends StatelessWidget {
+  const AppBarTextField({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 32,
+      margin: EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+      child: TextField(
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.all(Radius.circular(14)),
+          ),
+          hintText: 'Search Now',
+          filled: true,
+          fillColor: Colors.grey[200],
+          isDense: true,
+          suffixIcon: Icon(Icons.search),
+          contentPadding: EdgeInsets.only(top: 0, left: 14),
+        ),
       ),
     );
   }
@@ -78,19 +116,21 @@ class AdBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      image,
-      width: double.infinity,
-      fit: BoxFit.cover,
+    return Container(
+      child: Image.asset(
+        image,
+        width: double.infinity,
+        fit: BoxFit.cover,
+      ),
     );
   }
 }
 
 // This is tab container.
-// You can change indicator color.
 class TabContainer extends StatelessWidget {
   const TabContainer({Key? key}) : super(key: key);
 
+  // Can change indicator color.
   static Color _indicatorColor = Color(0xffee8181);
 
   @override
@@ -233,7 +273,7 @@ class HairStyleRow extends StatelessWidget {
 
 // HairStyleItem is a each of hair style.
 
-// @params {String} image: path to image. But, if you use image from internet you must change code Image.asset() to Image.network() as [#2]
+// @params {String} image: path to image
 // @params {String} name
 // @params {String} stylist
 class HairStyleItem extends StatelessWidget {
@@ -253,7 +293,7 @@ class HairStyleItem extends StatelessWidget {
     return Container(
       child: Column(
         children: <Widget>[
-          // [#2]
+          // If use image from internet. Must change to Image.network()
           Image.asset(
             image,
             width: double.infinity,
