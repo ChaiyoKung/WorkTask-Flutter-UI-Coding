@@ -11,26 +11,28 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Title',
       home: Scaffold(
-        // appBar: AppBar(),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          items: [
+          items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Image.asset('assets/icons/home_cut.png'), label: "Tab 1"),
+                icon: Image.asset('assets/icons/home_cut.png'),
+                label: "Bottom Tab 1"),
             BottomNavigationBarItem(
                 icon: Image.asset('assets/icons/account_cut.png'),
-                label: "Tab 2"),
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Tab 3"),
-            BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: "Tab 4"),
+                label: "Bottom Tab 2"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle), label: "Tab 5"),
+                icon: Icon(Icons.home), label: "Bottom Tab 3"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.bookmark), label: "Bottom Tab 4"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.account_circle), label: "Bottom Tab 5"),
           ],
           showSelectedLabels: false,
           showUnselectedLabels: false,
           unselectedItemColor: Colors.grey[400],
         ),
         body: Column(
-          children: [MyAppBar(), HomePage()],
+          children: [MyAppBar(), AdBanner(), Expanded(child: TabContainer())],
         ),
       ),
     );
@@ -60,8 +62,157 @@ class MyAppBar extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class AdBanner extends StatelessWidget {
+  const AdBanner({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset(
+      'assets/images/ad.png',
+      width: double.infinity,
+      fit: BoxFit.cover,
+    );
+  }
+}
+
+class TabContainer extends StatelessWidget {
+  const TabContainer({Key? key}) : super(key: key);
+
+  static Color _indicatorColor = Color(0xffee8181);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: DefaultTabController(
+      length: 3,
+      child: Column(
+        children: [
+          TabBar(
+              indicatorColor: _indicatorColor,
+              indicatorWeight: 4,
+              tabs: <Tab>[
+                Tab(
+                    icon: Text(
+                  'Tab 1',
+                  style: TextStyle(color: Colors.black),
+                )),
+                Tab(
+                    icon: Text(
+                  'Tab 2',
+                  style: TextStyle(color: Colors.black),
+                )),
+                Tab(
+                    icon: Text(
+                  'Tab 3',
+                  style: TextStyle(color: Colors.black),
+                )),
+              ]),
+          Expanded(child: TabBarView(children: [TabOne(), TabOne(), TabOne()]))
+        ],
+      ),
+    ));
+  }
+}
+
+class TabOne extends StatelessWidget {
+  const TabOne({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: ListView(
+        children: [
+          HairStyleRow(
+            children: [
+              HairStyleItem(
+                  image: 'assets/images/hair.png',
+                  name: 'Kowloon',
+                  stylist: 'Hair Stylist'),
+              HairStyleItem(
+                  image: 'assets/images/hair.png',
+                  name: 'Kowloon',
+                  stylist: 'Hair Stylist'),
+              HairStyleItem(
+                  image: 'assets/images/hair.png',
+                  name: 'Kowloon',
+                  stylist: 'Hair Stylist'),
+            ],
+            borderBottomColor: Colors.red,
+          ),
+          HairStyleRow(
+            children: [
+              HairStyleItem(
+                  image: 'assets/images/hair.png',
+                  name: 'Kowloon',
+                  stylist: 'Hair Stylist'),
+              HairStyleItem(
+                  image: 'assets/images/hair.png',
+                  name: 'Kowloon',
+                  stylist: 'Hair Stylist'),
+              HairStyleItem(
+                  image: 'assets/images/hair.png',
+                  name: 'Kowloon',
+                  stylist: 'Hair Stylist'),
+            ],
+            borderBottomColor: Colors.green,
+          ),
+          HairStyleRow(
+            children: [
+              HairStyleItem(
+                  image: 'assets/images/hair.png',
+                  name: 'Kowloon',
+                  stylist: 'Hair Stylist'),
+              HairStyleItem(
+                  image: 'assets/images/hair.png',
+                  name: 'Kowloon',
+                  stylist: 'Hair Stylist'),
+              HairStyleItem(
+                  image: 'assets/images/hair.png',
+                  name: 'Kowloon',
+                  stylist: 'Hair Stylist'),
+            ],
+            borderBottomColor: Colors.blue,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class HairStyleRow extends StatelessWidget {
+  const HairStyleRow(
+      {Key? key, required this.borderBottomColor, required this.children})
+      : super(key: key);
+
+  final Color borderBottomColor;
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: children,
+      ),
+      decoration: BoxDecoration(
+          border:
+              Border(bottom: BorderSide(width: 10, color: borderBottomColor))),
+      margin: EdgeInsets.only(bottom: 16),
+    );
+  }
+}
+
+class HairStyleItem extends StatelessWidget {
+  const HairStyleItem(
+      {Key? key,
+      required this.image,
+      required this.name,
+      required this.stylist})
+      : super(key: key);
+
+  final String image;
+  final String name;
+  final String stylist;
 
   @override
   Widget build(BuildContext context) {
@@ -69,12 +220,29 @@ class HomePage extends StatelessWidget {
       child: Column(
         children: [
           Image.asset(
-            'assets/images/ad.png',
-            width: MediaQuery.of(context).size.width,
+            image,
+            width: double.infinity,
             fit: BoxFit.cover,
+          ),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  name,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+                ),
+                Text(
+                  stylist,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+                )
+              ],
+            ),
+            padding: EdgeInsets.all(5),
           ),
         ],
       ),
+      width: MediaQuery.of(context).size.width / 3 - 5,
     );
   }
 }
