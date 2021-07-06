@@ -105,24 +105,30 @@ class TabContainer extends StatelessWidget {
               indicatorWeight: 4,
               tabs: <Tab>[
                 Tab(
-                    icon: Text(
-                  'Tab 1',
-                  style: TextStyle(color: Colors.black),
-                )),
+                  icon: Text(
+                    'Tab 1',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
                 Tab(
-                    icon: Text(
-                  'Tab 2',
-                  style: TextStyle(color: Colors.black),
-                )),
+                  icon: Text(
+                    'Tab 2',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
                 Tab(
-                    icon: Text(
-                  'Tab 3',
-                  style: TextStyle(color: Colors.black),
-                )),
+                  icon: Text(
+                    'Tab 3',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
               ]),
-          Expanded(child: TabBarView(
+          Expanded(
+            child: TabBarView(
               // Append more Tab
-              children: <Widget>[TabOne(), TabOne(), TabOne()])),
+              children: <Widget>[TabOne(), TabOne(), TabOne()],
+            ),
+          ),
         ],
       ),
     ));
@@ -216,8 +222,10 @@ class HairStyleRow extends StatelessWidget {
         children: children,
       ),
       decoration: BoxDecoration(
-          border:
-              Border(bottom: BorderSide(width: 10, color: borderBottomColor))),
+        border: Border(
+          bottom: BorderSide(width: 10, color: borderBottomColor),
+        ),
+      ),
       margin: EdgeInsets.only(bottom: 16),
     );
   }
@@ -262,7 +270,7 @@ class HairStyleItem extends StatelessWidget {
                 Text(
                   stylist,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
-                )
+                ),
               ],
             ),
             padding: EdgeInsets.all(5),
