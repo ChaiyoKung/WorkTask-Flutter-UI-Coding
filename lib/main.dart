@@ -120,12 +120,9 @@ class TabContainer extends StatelessWidget {
                   style: TextStyle(color: Colors.black),
                 )),
               ]),
-          Expanded(
-              child: TabBarView(children: <Widget>[
-            TabOne(),
-            TabOne(),
-            TabOne()
-          ])), // Append more Tab
+          Expanded(child: TabBarView(
+              // Append more Tab
+              children: <Widget>[TabOne(), TabOne(), TabOne()])),
         ],
       ),
     ));
