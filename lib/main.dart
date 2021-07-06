@@ -32,7 +32,11 @@ class MyApp extends StatelessWidget {
           unselectedItemColor: Colors.grey[400],
         ),
         body: Column(
-          children: [MyAppBar(), AdBanner(), Expanded(child: TabContainer())],
+          children: <Widget>[
+            MyAppBar(),
+            AdBanner(),
+            Expanded(child: TabContainer())
+          ],
         ),
       ),
     );
@@ -47,7 +51,7 @@ class MyAppBar extends StatelessWidget {
     return SafeArea(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
+        children: <Widget>[
           Image.asset('assets/icons/hara_logo.png'),
           IconButton(
             onPressed: null,
@@ -86,7 +90,7 @@ class TabContainer extends StatelessWidget {
         child: DefaultTabController(
       length: 3,
       child: Column(
-        children: [
+        children: <Widget>[
           TabBar(
               indicatorColor: _indicatorColor,
               indicatorWeight: 4,
@@ -107,7 +111,9 @@ class TabContainer extends StatelessWidget {
                   style: TextStyle(color: Colors.black),
                 )),
               ]),
-          Expanded(child: TabBarView(children: [TabOne(), TabOne(), TabOne()]))
+          Expanded(
+              child:
+                  TabBarView(children: <Widget>[TabOne(), TabOne(), TabOne()])),
         ],
       ),
     ));
@@ -121,9 +127,9 @@ class TabOne extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: ListView(
-        children: [
+        children: <Widget>[
           HairStyleRow(
-            children: [
+            children: <Widget>[
               HairStyleItem(
                   image: 'assets/images/hair.png',
                   name: 'Kowloon',
@@ -140,7 +146,7 @@ class TabOne extends StatelessWidget {
             borderBottomColor: Colors.red,
           ),
           HairStyleRow(
-            children: [
+            children: <Widget>[
               HairStyleItem(
                   image: 'assets/images/hair.png',
                   name: 'Kowloon',
@@ -157,7 +163,7 @@ class TabOne extends StatelessWidget {
             borderBottomColor: Colors.green,
           ),
           HairStyleRow(
-            children: [
+            children: <Widget>[
               HairStyleItem(
                   image: 'assets/images/hair.png',
                   name: 'Kowloon',
@@ -218,7 +224,7 @@ class HairStyleItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Column(
-        children: [
+        children: <Widget>[
           Image.asset(
             image,
             width: double.infinity,
@@ -227,7 +233,7 @@ class HairStyleItem extends StatelessWidget {
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: <Widget>[
                 Text(
                   name,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
