@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/src/material/bottom_navigation_bar.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,10 +8,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Title',
+      title: 'Title', // Can change this title.
       home: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
+          /**
+           * Here is bottom navigation tab.
+           * You can change icon, label (hided) and append more <BottomNavigationBarItem>
+           */
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
                 icon: Image.asset('assets/icons/home_cut.png'),
@@ -43,6 +46,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// This is custom app bar.
 class MyAppBar extends StatelessWidget {
   const MyAppBar({Key? key}) : super(key: key);
 
@@ -66,19 +70,24 @@ class MyAppBar extends StatelessWidget {
   }
 }
 
+// This is ad banner
 class AdBanner extends StatelessWidget {
   const AdBanner({Key? key}) : super(key: key);
+
+  final String image = 'assets/images/ad.png';
 
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      'assets/images/ad.png',
+      image,
       width: double.infinity,
       fit: BoxFit.cover,
     );
   }
 }
 
+// This is tab container.
+// You can change indicator color.
 class TabContainer extends StatelessWidget {
   const TabContainer({Key? key}) : super(key: key);
 
@@ -112,14 +121,19 @@ class TabContainer extends StatelessWidget {
                 )),
               ]),
           Expanded(
-              child:
-                  TabBarView(children: <Widget>[TabOne(), TabOne(), TabOne()])),
+              child: TabBarView(children: <Widget>[
+            TabOne(),
+            TabOne(),
+            TabOne()
+          ])), // Append more Tab
         ],
       ),
     ));
   }
 }
 
+// Example of Tab
+// Can change border bottom color as [#1]
 class TabOne extends StatelessWidget {
   const TabOne({Key? key}) : super(key: key);
 
@@ -143,7 +157,7 @@ class TabOne extends StatelessWidget {
                   name: 'Kowloon',
                   stylist: 'Hair Stylist'),
             ],
-            borderBottomColor: Colors.red,
+            borderBottomColor: Colors.red, // [#1]
           ),
           HairStyleRow(
             children: <Widget>[
@@ -160,7 +174,7 @@ class TabOne extends StatelessWidget {
                   name: 'Kowloon',
                   stylist: 'Hair Stylist'),
             ],
-            borderBottomColor: Colors.green,
+            borderBottomColor: Colors.green, // [#1]
           ),
           HairStyleRow(
             children: <Widget>[
@@ -177,7 +191,7 @@ class TabOne extends StatelessWidget {
                   name: 'Kowloon',
                   stylist: 'Hair Stylist'),
             ],
-            borderBottomColor: Colors.blue,
+            borderBottomColor: Colors.blue, // [#1]
           ),
         ],
       ),
@@ -185,6 +199,10 @@ class TabOne extends StatelessWidget {
   }
 }
 
+// HairStyleRow is as the row that have many HairStyleItem
+
+// @params {Color} borderBottomColor
+// @params {List<Widget>} children
 class HairStyleRow extends StatelessWidget {
   const HairStyleRow(
       {Key? key, required this.borderBottomColor, required this.children})
@@ -208,6 +226,11 @@ class HairStyleRow extends StatelessWidget {
   }
 }
 
+// HairStyleItem is a each of hair style.
+
+// @params {String} image: path to image. But, if you use image from internet you must change code Image.asset() to Image.network() as [#2]
+// @params {String} name
+// @params {String} stylist
 class HairStyleItem extends StatelessWidget {
   const HairStyleItem(
       {Key? key,
@@ -225,6 +248,7 @@ class HairStyleItem extends StatelessWidget {
     return Container(
       child: Column(
         children: <Widget>[
+          // [#2]
           Image.asset(
             image,
             width: double.infinity,
